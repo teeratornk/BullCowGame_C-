@@ -66,18 +66,20 @@ void PlayGame() {
 
 	//  loop for the number of terns asking for guesses
 	//TODO change from FOR to WHILE loop, validating a try
-	for (int32 i = 0; i < MaxTries; i++) {
+
+	while (! BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries) {
 
 		FText Guess = GetValidGuess(); // TODO make loop checking valid guess
 
 		// submit valid guess to the game and receive counts
-		FBullCowCount BullCowCount =  BCGame.SubmitValidGuess(Guess);
-		
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
+
 		// print number of bulls and cows
 		std::cout << "Bulls = " << BullCowCount.Bulls;
 		std::cout << ". Cows = " << BullCowCount.Cows << std::endl;
 
 		PrintBack(Guess);
+
 	}
 
 	// TODO add a game summary
