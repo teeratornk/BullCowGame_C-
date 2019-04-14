@@ -29,5 +29,8 @@
     <ClInclude Include="FBullCowGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FMyHiddenWordList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

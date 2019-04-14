@@ -1,11 +1,13 @@
 #include "FBullCowGame.h"
 #include <map>
+#include<iostream>
+#include<boost/algorithm/string.hpp>
 #define TMap std::map // using and define are not the same
 
 using int32 = int;
 
-FBullCowGame::FBullCowGame() { Reset(); }
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+FBullCowGame::FBullCowGame() { Reset(); } // default con
+
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
@@ -40,9 +42,19 @@ bool FBullCowGame::IsLowercase(FString Word) const {
 	return true;
 }
 
+int32 FBullCowGame::GetMaxTries() const { 
+	//TMap<int32, int32> WordLengthToMaxtries{ {3,5}, {4,7}, {5,10}, {6,15}, {7,20} };
+	//return WordLengthToMaxtries[MyHiddenWord.length()];
+	return MyHiddenWord.length() * 2 + 2;
+}
+
 void FBullCowGame::Reset() {
-	constexpr int32 MAX_TRIES = 8;
-	MyMaxTries = MAX_TRIES;
+	//constexpr int32 MAX_TRIES = 8;
+	//MyMaxTries = MAX_TRIES;
+
+	FMyHiddenWordUse RandomHiddenWord;
+
+	std::cout << RandomHiddenWord.FWordList[0];
 
 	const FString HIDDEN_WORD = "planet";
 	MyHiddenWord = HIDDEN_WORD;
@@ -90,6 +102,11 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess) {
 
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const {
+	// TODO QUIT program
+	if (Guess == "QUIT:(") {
+		return EGuessStatus::QUIT;
+	}
+	
 	if (! IsIsogram(Guess)) {
 		return EGuessStatus::Not_Isogram;
 	}// if the guess is not an isogram 

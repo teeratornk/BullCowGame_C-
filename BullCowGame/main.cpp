@@ -2,6 +2,8 @@
 This acts as the view in a MVC pattern and is responsible for all user interaction. 
 For game logic see the FBullCowGame class.
 */
+#pragma once
+
 #include<iostream>
 #include<string>
 #include<boost/algorithm/string.hpp>
@@ -80,7 +82,10 @@ void PlayGame() {
 
 	while (! BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries) {
 
-		FText Guess = GetValidGuess(); // TODO make loop checking valid guess
+		FText Guess = GetValidGuess(); 
+
+		// quit the game
+		if (Guess == "--quit--") { return; }
 
 		// submit valid guess to the game and receive counts
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
@@ -104,6 +109,7 @@ FText GetValidGuess() {
 	EGuessStatus Status = EGuessStatus::Invalid;
 	do {
 		// get a guess from the player
+		std::cout << "You can type 'QUIT:(' to exit the game \n";
 		std::cout << "Try " << BCGame.GetCurrentTry();
 		std::cout << " of " << BCGame.GetMaxTries();
 		std::cout << " Enter your guess: ";
@@ -111,6 +117,10 @@ FText GetValidGuess() {
 
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status) {
+		case EGuessStatus::QUIT:
+			std::cout << "So sad to see you leave \n\n";
+			return "--quit--";
+			//break;
 		case EGuessStatus::Wrong_Length:
 			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word. \n\n";
 			break;

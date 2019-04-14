@@ -1,5 +1,6 @@
 #pragma once
 #include<string>
+#include "FMyHiddenWordList.h"
 // no namespace in the header file
 
 using FString = std::string;
@@ -15,7 +16,8 @@ enum class EGuessStatus {
 	OK,
 	Not_Isogram,
 	Wrong_Length,
-	Not_Lowercase
+	Not_Lowercase,
+	QUIT
 };
 
 enum class EResetStatus {
@@ -42,7 +44,7 @@ public:
 private:
 	// see constructor for initialisation
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
+	//int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 };
