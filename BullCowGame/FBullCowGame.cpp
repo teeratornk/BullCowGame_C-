@@ -2,6 +2,8 @@
 #include <map>
 #include<iostream>
 #include<boost/algorithm/string.hpp>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 #define TMap std::map // using and define are not the same
 
 using int32 = int;
@@ -53,10 +55,12 @@ void FBullCowGame::Reset() {
 	//MyMaxTries = MAX_TRIES;
 
 	FMyHiddenWordUse RandomHiddenWord;
+	srand(time(NULL));
+	int iSecret = rand() % RandomHiddenWord.FWordList.size();
 
-	std::cout << RandomHiddenWord.FWordList[0];
+	//std::cout << RandomHiddenWord.FWordList[iSecret] << std::endl;
 
-	const FString HIDDEN_WORD = "planet";
+	const FString HIDDEN_WORD = RandomHiddenWord.FWordList[iSecret];
 	MyHiddenWord = HIDDEN_WORD;
 
 	MyCurrentTry = 1;

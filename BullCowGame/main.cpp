@@ -152,7 +152,7 @@ bool AskToPlayAgain() {
 	FText Response = "";
 	std::getline(std::cin, Response);
 	//std::cout << char(::toupper(Response[0]));
-	return (Response[0] == 'y' or Response[0] == 'y');
+	return (Response[0] == 'y' or Response[0] == 'Y');
 }
 
 void PrintGameSummary() {
